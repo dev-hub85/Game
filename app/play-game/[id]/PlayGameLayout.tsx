@@ -1,0 +1,157 @@
+import React from "react";
+import Header from "@/components/header";
+import GameMediaGallery from "@/components/GameMeida";
+import GameCard from "@/components/GameCard";
+import Image from "next/image";
+import { Game } from "@/type/game";
+
+interface PlayGameLayoutProps {
+  game: Game;
+  similarGames: Game[];
+  about: string;
+  controls: string;
+  tags: string[];
+  children: React.ReactNode;
+}
+
+const PlayGameLayout: React.FC<PlayGameLayoutProps> = ({
+  game,
+  similarGames,
+  about,
+  controls,
+  tags,
+  children,
+}) => {
+  return (
+    <div className="min-h-screen  text-white">
+      <Header />
+      <main className="flex-1 w-full mx-auto pt-5">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-6 px-2 md:px-2 lg:px-4">
+          <h1 className="font-oxanium font-extrabold text-2xl md:text-3xl mb-0 drop-shadow-lg">
+            {game.name}
+          </h1>
+          <div className="flex items-center gap-4 flex-wrap">
+            <span className="bg-gradient-to-r from-[#BB0051] to-[#FF3D8E] font-bold font-oxanium px-2 py-1 rounded-md shadow">
+              {game.category ||
+                (game.categories && game.categories[0]) ||
+                "Uncategorized"}
+            </span>
+            <span className="text-white text-sm flex items-center gap-1">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+                <path
+                  fill="#FF3D8E"
+                  d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"
+                />
+              </svg>
+              {game.hits || 0} Plays
+            </span>
+            <span className="text-[#FFD600] text-sm flex items-center gap-1">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                <path
+                  fill="#FFD600"
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+              {(game.rating || 0) / 10} Rating
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-col lg:flex-row gap-10 px-2 md:px-2 lg:px-4">
+          <div className="flex-1 bg-[#010419] rounded-2xl shadow-2xl border border-[#FF3D8E] flex flex-col items-center justify-center min-h-105 relative p-1">
+            {children}
+          </div>
+          <div className="flex flex-col gap-8 w-full lg:w-90">
+            <div className="bg-[#010419] rounded-2xl border border-[#FF3D8E33] p-6 shadow-xl">
+              <h3 className="font-oxanium font-bold text-xl mb-3">
+                About This Game
+              </h3>
+              <p className="text-gray-300 text-base mb-4">{about}</p>
+              <div className="flex flex-wrap gap-3">
+                {tags.map((tag, i) => (
+                  <span
+                    key={i}
+                    className="bg-white text-[#FF3D8E] font-bold font-oxanium px-4 py-1 rounded-lg text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="bg-[#010419] rounded-2xl border border-[#FF3D8E33] p-6 shadow-xl">
+              <h3 className="font-oxanium font-bold text-xl mb-3">
+                Share This Game
+              </h3>
+              <div className="flex gap-5 mt-2">
+                <a
+                  href="#"
+                  className="bg-white text-[#FF3D8E] px-2 py-1 rounded-lg font-bold font-oxanium text-base hover:bg-[#FF3D8E33] transition-all"
+                >
+                  Facebook
+                </a>
+                <a
+                  href="#"
+                  className="bg-white text-[#FF3D8E] px-2 py-1 rounded-lg font-bold font-oxanium text-base hover:bg-[#FF3D8E33] transition-all"
+                >
+                  Twitter
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <GameMediaGallery game={game} />
+        <div className="mt-5 mb-14">
+          <div className="flex items-start justify-between mb-2 px-2 md:px-2 lg:px-4">
+            <div className="flex py-2 gap-5">
+              <div>
+                <h2 className="font-oxanium font-extrabold text-2xl flex items-center gap-2 mb-0">
+                  Similar Games
+                </h2>
+                <p className="text-[#b6c6e3] text-base">
+                  You might also like these games
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-2 md:px-2 lg:px-4">
+            {similarGames.length === 0 && (
+              <div className="text-[#b6c6e3] col-span-full text-center">
+                No similar games found.
+              </div>
+            )}
+            {similarGames.map((g) => (
+              <GameCard
+                key={g.id}
+                id={g.id}
+                name={g.name}
+                category={g.category}
+                create_date={g.create_date}
+                date={g.date}
+                description={
+                  g.description || g.translations?.en?.description || ""
+                }
+                thumb={
+                  g.thumb8 ||
+                  g.thumb7 ||
+                  g.thumb6 ||
+                  g.thumb5 ||
+                  g.thumb4 ||
+                  g.thumb3 ||
+                  g.thumb2 ||
+                  g.thumb1 ||
+                  g.image ||
+                  g.thumbnail ||
+                  ""
+                }
+                rating={g.rating}
+                playCount={g.hits || 0}
+                hot={g.rating && g.rating > 50 ? true : false}
+              />
+            ))}
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default PlayGameLayout;

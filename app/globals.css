@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-oxanium {
+  font-family: var(--font-oxanium), sans-serif;
+}
+
+.ball-glow {
+  background: radial-gradient(circle at 30% 30%,
+      #4ecbff 0%,
+      #0b5f7a 35%,
+      #061c2a 70%);
+
+  box-shadow:
+    inset -20px -20px 40px rgba(0, 0, 0, 0.6),
+    inset 10px 10px 30px rgba(255, 255, 255, 0.08),
+    0 0 60px rgba(78, 203, 255, 0.4),
+    0 0 120px rgba(78, 203, 255, 0.2);
+
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.ball-glow::before {
+  content: "";
+  position: absolute;
+  top: 18%;
+  left: 22%;
+  width: 35%;
+  height: 35%;
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.05),
+      transparent);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow:
+      inset -20px -20px 40px rgba(0, 0, 0, 0.6),
+      inset 10px 10px 30px rgba(255, 255, 255, 0.08),
+      0 0 60px rgba(78, 203, 255, 0.4),
+      0 0 120px rgba(78, 203, 255, 0.2);
+  }
+
+  50% {
+    box-shadow:
+      inset -20px -20px 40px rgba(0, 0, 0, 0.6),
+      inset 10px 10px 30px rgba(255, 255, 255, 0.12),
+      0 0 90px rgba(78, 203, 255, 0.7),
+      0 0 160px rgba(78, 203, 255, 0.4);
+  }
+}
+
+
+/* Hide scrollbar for Chrome, Edge, Safari */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+
+  100% {
+    transform: translateX(200%) rotate(25deg);
+  }
+}
+
+.animate-[shine_2s_linear_infinite] {
+  animation: shine 2s linear infinite;
+}
+
+/* Hide number input arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  /* Firefox */
+}
+
+     .loader {
+       border: 4px solid #0ff0fc33;
+       border-top: 4px solid #0ff0fc;
+       border-radius: 50%;
+       width: 40px;
+       height: 40px;
+       animation: spin 1s linear infinite;
+     }
+  
+     @keyframes spin {
+       0% {
+         transform: rotate(0deg);
+       }
+  
+       100% {
+         transform: rotate(360deg);
+       }
+     }
