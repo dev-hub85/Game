@@ -6,6 +6,7 @@ import HTMLGames from "@/lib/html_games";
 import PacoGames from "@/lib/paco_games";
 import onlineGamesIOData from "@/lib/online_games_io";
 import { Game } from "@/type/game";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
   return [
@@ -17,6 +18,41 @@ export async function generateStaticParams() {
 
 interface PlayGamePageProps {
   params: Promise<{ id: string }>;
+}
+// Dynamic metadata function
+export async function generateMetadata({
+  params,
+}: PlayGamePageProps): Promise<Metadata> {
+  const id = (await params).id;
+  const game = getGameById(id);
+  if (!game)
+    return {
+      title: "Game Not Found",
+      description: "This game does not exist.",
+    };
+
+  const description =
+    game.description ||
+    game.translations?.en?.description ||
+    "Play this exciting game online at NeoGames.";
+
+  // Take category + tags (first 4 words from description)
+  const tags = (game.category ? [game.category] : [])
+    .concat(description.match(/\b([A-Z][a-z]+)\b/g) || [])
+    .slice(0, 4);
+
+  const keywordsArray: string[] = [
+    game.name,
+    game.category || (game.categories && game.categories[0]) || "game",
+    ...tags,
+  ];
+
+  return {
+    title: `${game.name} - Play Online at NeoGames`,
+    description,
+    keywords: keywordsArray.join(", "),
+    robots: "index, follow",
+  };
 }
 
 const PlayGamePage = async ({ params }: PlayGamePageProps) => {
@@ -66,12 +102,7 @@ const PlayGamePage = async ({ params }: PlayGamePageProps) => {
       tags={tags}
     >
       {game.url ? (
-        <PlayGameClient
-          url={game.url}
-          name={game.name}
-          width={game.width || 800}
-          height={game.height || 480}
-        />
+        <PlayGameClient url={game.url} name={game.name} />
       ) : (
         <div className="flex flex-col items-center justify-center h-80 w-full">
           <div className="text-5xl mb-4">🎮</div>

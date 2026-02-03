@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
         hostname: "www.onlinegames.io",
       },
     ],
+    // Add this line to allow quality 100 and 75
+    qualities: [75, 100],
   },
 };
 

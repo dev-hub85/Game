@@ -26,7 +26,12 @@ import {
   FaInfoCircle,
   FaEnvelope,
 } from "react-icons/fa";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 import Categories from "../lib/categories";
+import { logOut } from "@/lib/auth";
+import { useUser } from "@/context/UserContext";
+import { useRouter } from "next/navigation";
+import AuthModal from "./AuthModal";
 
 const COLORS = {
   bg: "#12141B",
@@ -117,11 +122,28 @@ const categoryIcons: Record<string, React.ReactNode> = {
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isAuthModalOpen, setAuthModalOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { isLoggedIn, user, userProfile } = useUser();
   const ACTIVE_GRADIENT =
     "linear-gradient(135deg, #BB0051 0%, #E0146F 50%, #FF3D8E 100%)";
   const PRIMARY_GRADIENT =
     "linear-gradient(135deg, #BB0051 0%, #E0146F 50%, #FF3D8E 100%)";
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await logOut();
+      setOpen(false);
+      router.push("/");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
 
   return (
     <>
@@ -187,6 +209,24 @@ const Sidebar = () => {
           </div>
         </div>
 
+        {/* Mobile Welcome Message - Only visible on mobile when logged in */}
+        {isLoggedIn && (
+          <div
+            className="md:hidden mx-4 mb-4 px-4 py-3 rounded-lg"
+            style={{ backgroundColor: COLORS.primarySoft }}
+          >
+            <div
+              className="text-sm font-oxanium"
+              style={{ color: COLORS.muted }}
+            >
+              Welcome back,
+            </div>
+            <div className="text-lg font-bold text-white font-oxanium">
+              {userProfile?.displayName || user?.email?.split("@")[0]}
+            </div>
+          </div>
+        )}
+
         {/* Nav */}
         <nav className="px-2 mb-4 space-y-1">
           {navLinks.map((link) => {
@@ -250,7 +290,47 @@ const Sidebar = () => {
             })}
           </div>
         </div>
+
+        {/* Mobile Auth Buttons - At bottom, only visible on mobile */}
+        <div
+          className="md:hidden mt-auto px-4 py-4 border-t"
+          style={{ borderColor: COLORS.border }}
+        >
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-oxanium text-white transition-all border hover:bg-[#FF3D8E]"
+              style={{
+                backgroundColor: COLORS.panel,
+                borderColor: "#FF3D8E",
+              }}
+            >
+              <FiLogOut size={18} />
+              {isLoggingOut ? "Logging out..." : "Logout"}
+            </button>
+          ) : (
+            <button
+              onClick={() => setAuthModalOpen(true)}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-oxanium text-white transition-all border"
+              style={{
+                background: PRIMARY_GRADIENT,
+                borderColor: COLORS.primary,
+                boxShadow: "0 6px 18px rgba(187, 0, 81, 0.45)",
+              }}
+            >
+              <FiLogIn size={18} />
+              Login
+            </button>
+          )}
+        </div>
       </aside>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+      />
 
       {/* Overlay */}
       {open && (

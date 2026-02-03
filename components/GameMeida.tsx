@@ -45,7 +45,7 @@ const GameMediaGallery: React.FC<GameMediaGalleryProps> = ({ game }) => {
   const closeModal = () => setModalMedia(null);
 
   return (
-    <div className="my-5 py-5 bg-[#010419] px-2 md:px-2 lg:px-4">
+    <div className="py-5 bg-[#010419] px-2 md:px-2 lg:px-4">
       <div className="flex flex-col md:flex-row items-start mb-2 gap-4 ">
         <div>
           <h2 className="text-white font-oxanium font-extrabold text-2xl flex items-center gap-2 mb-0">

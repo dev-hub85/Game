@@ -2,8 +2,9 @@ import React from "react";
 import Header from "@/components/header";
 import GameMediaGallery from "@/components/GameMeida";
 import GameCard from "@/components/GameCard";
-import Image from "next/image";
 import { Game } from "@/type/game";
+import HitsCounter from "@/components/HitsCounter";
+import ReviewsSection from "@/components/ReviewsSection";
 
 interface PlayGameLayoutProps {
   game: Game;
@@ -36,69 +37,35 @@ const PlayGameLayout: React.FC<PlayGameLayoutProps> = ({
                 (game.categories && game.categories[0]) ||
                 "Uncategorized"}
             </span>
-            <span className="text-white text-sm flex items-center gap-1">
-              <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
-                <path
-                  fill="#FF3D8E"
-                  d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"
-                />
-              </svg>
-              {game.hits || 0} Plays
-            </span>
-            <span className="text-[#FFD600] text-sm flex items-center gap-1">
-              <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                <path
-                  fill="#FFD600"
-                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                />
-              </svg>
-              {(game.rating || 0) / 10} Rating
-            </span>
+            <HitsCounter gameId={game.id} initialHits={game.hits || 0} />
           </div>
         </div>
         <div className="flex flex-col lg:flex-row gap-10 px-2 md:px-2 lg:px-4">
           <div className="flex-1 bg-[#010419] rounded-2xl shadow-2xl border border-[#FF3D8E] flex flex-col items-center justify-center min-h-105 relative p-1">
             {children}
           </div>
-          <div className="flex flex-col gap-8 w-full lg:w-90">
-            <div className="bg-[#010419] rounded-2xl border border-[#FF3D8E33] p-6 shadow-xl">
-              <h3 className="font-oxanium font-bold text-xl mb-3">
-                About This Game
-              </h3>
-              <p className="text-gray-300 text-base mb-4">{about}</p>
-              <div className="flex flex-wrap gap-3">
-                {tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="bg-white text-[#FF3D8E] font-bold font-oxanium px-4 py-1 rounded-lg text-sm"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="bg-[#010419] rounded-2xl border border-[#FF3D8E33] p-6 shadow-xl">
-              <h3 className="font-oxanium font-bold text-xl mb-3">
-                Share This Game
-              </h3>
-              <div className="flex gap-5 mt-2">
-                <a
-                  href="#"
-                  className="bg-white text-[#FF3D8E] px-2 py-1 rounded-lg font-bold font-oxanium text-base hover:bg-[#FF3D8E33] transition-all"
-                >
-                  Facebook
-                </a>
-                <a
-                  href="#"
-                  className="bg-white text-[#FF3D8E] px-2 py-1 rounded-lg font-bold font-oxanium text-base hover:bg-[#FF3D8E33] transition-all"
-                >
-                  Twitter
-                </a>
-              </div>
-            </div>
+        </div>
+        <div className="bg-[#010419] p-6 shadow-xl mt-5">
+          <h3 className="font-oxanium font-bold text-2xl mb-3">
+            About This Game
+          </h3>
+          <p className="text-gray-300 text-base mb-3">{about}</p>
+          <div className="flex flex-wrap gap-3">
+            {tags.map((tag, i) => (
+              <span
+                key={i}
+                className="bg-white text-[#FF3D8E] font-bold font-oxanium px-4 py-1 rounded-lg text-sm"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
         <GameMediaGallery game={game} />
+
+        {/* Reviews Section */}
+        <ReviewsSection gameId={game.id} gameName={game.name} />
+
         <div className="mt-5 mb-14">
           <div className="flex items-start justify-between mb-2 px-2 md:px-2 lg:px-4">
             <div className="flex py-2 gap-5">

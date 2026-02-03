@@ -20,7 +20,7 @@ const FeaturedGames = () => {
 
   /* ---------------- Prepare Featured Games ---------------- */
   const featured: Game[] = shuffleArray(
-    HTMLGames.slice(50, 72).map(normalizeGame),
+    HTMLGames.slice(100, 122).map(normalizeGame),
   );
 
   /* ---------------- Scroll Function ---------------- */
@@ -61,7 +61,7 @@ const FeaturedGames = () => {
 
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto hide-scrollbar scroll-smooth py-2 mx-4"
+          className="flex gap-4 overflow-x-auto hide-scrollbar scroll-smooth mx-4"
         >
           {featured.map((game) => (
             <div

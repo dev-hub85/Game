@@ -81,7 +81,7 @@ const NewArrivals = () => {
         <div className="relative">
           <div
             ref={scrollRef}
-            className="flex gap-3 overflow-x-auto py-2 px-1 scroll-smooth hide-scrollbar"
+            className="flex gap-3 overflow-x-auto px-1 scroll-smooth hide-scrollbar"
           >
             {arrivals.length === 0 ? (
               <p className="text-[#b6c6e3] text-sm">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import Categories from "../lib/categories";
 import { useRouter } from "next/navigation";
 import HTMLGames from "../lib/html_games";
@@ -8,22 +8,28 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Image from "next/image";
 import IconButton from "./IconButton";
 import { Game } from "@/type/game";
+import { cardColors } from "@/lib/colors";
 
-interface GameCollection {
-  games: Game[];
+function darken(hex: string, percent: number) {
+  const num = parseInt(hex.replace("#", ""), 16);
+  const r = Math.max(0, ((num >> 16) & 0xff) - 255 * (percent / 100));
+  const g = Math.max(0, ((num >> 8) & 0xff) - 255 * (percent / 100));
+  const b = Math.max(0, (num & 0xff) - 255 * (percent / 100));
+  return `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
 }
 
 const ChevronLeft = () => <FiChevronLeft size={24} />;
 const ChevronRight = () => <FiChevronRight size={24} />;
 
-// Map each category to a representative game (first found)
 const categoryImages: Record<
   string,
   { name: string; image: string } | undefined
 > = {};
 for (const cat of Categories) {
   const game = (
-    Array.isArray(HTMLGames) ? HTMLGames : (HTMLGames as GameCollection).games
+    Array.isArray(HTMLGames)
+      ? HTMLGames
+      : (HTMLGames as { games: Game[] }).games
   )?.find((g: Game) => (g.category ?? "").toLowerCase() === cat.toLowerCase());
   if (game) {
     categoryImages[cat] = {
@@ -42,16 +48,24 @@ for (const cat of Categories) {
   }
 }
 
+// Pre-compute stable random colors at module load time
+const categoryColorMap: Record<string, (typeof cardColors)[number]> = {};
+for (const cat of Categories) {
+  if (categoryImages[cat]?.image) {
+    categoryColorMap[cat] =
+      cardColors[Math.floor(Math.random() * cardColors.length)];
+  }
+}
+
 const GameCategories = () => {
   const router = useRouter();
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Scroll left/right handlers
+  // Scroll left/right
   const scroll = (dir: "left" | "right") => {
     if (scrollRef.current) {
-      const amount = 320; // px per scroll
       scrollRef.current.scrollBy({
-        left: dir === "left" ? -amount : amount,
+        left: dir === "left" ? -320 : 320,
         behavior: "smooth",
       });
     }
@@ -60,9 +74,8 @@ const GameCategories = () => {
   return (
     <section className="w-full bg-[#010419] py-5 relative px-4">
       <div className="mx-auto max-w-7xl">
-        {/* Header Row */}
+        {/* Header */}
         <div className="flex items-start justify-between mb-6">
-          {/* Title + Subtitle */}
           <div>
             <h2 className="text-white font-oxanium font-extrabold text-2xl md:text-3xl tracking-wide drop-shadow-[0_0_12px_#0ff0fc55]">
               Game Categories
@@ -72,7 +85,6 @@ const GameCategories = () => {
             </p>
           </div>
 
-          {/* Scroll Buttons */}
           <div className="flex gap-2 mt-1">
             <IconButton onClick={() => scroll("left")}>
               <ChevronLeft />
@@ -93,13 +105,20 @@ const GameCategories = () => {
         >
           {Categories.filter((cat) => categoryImages[cat]?.image).map((cat) => {
             const data = categoryImages[cat];
+            const randomColor = categoryColorMap[cat]; // stable per card
+
             return (
               <div
                 key={cat}
-                className="min-w-[140px] max-w-[160px] rounded-2xl flex flex-col items-center justify-between cursor-pointer transition-all hover:scale-105"
+                className="min-w-[140px] max-w-[160px] rounded-2xl flex flex-col py-2 items-center justify-between cursor-pointer transition-all scale-95 hover:scale-100 border-2"
+                style={{
+                  backgroundColor: `${randomColor.bg}25`,
+                  borderColor: darken(randomColor.bg, 20),
+                  borderStyle: "solid",
+                }}
                 onClick={() => router.push(`/category/${cat}`)}
               >
-                <div className="w-30 h-24 rounded-lg overflow-hidden bg-[#222] flex items-center justify-center mb-2 relative group">
+                <div className="w-30 h-24 rounded-lg overflow-hidden flex items-center justify-center mb-2 relative group">
                   <Image
                     src={data!.image}
                     alt={cat}

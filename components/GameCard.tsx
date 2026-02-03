@@ -60,12 +60,21 @@ const GameCard: React.FC<GameCardProps> = ({
     <div
       onClick={handleNavigate}
       className="
-    group relative cursor-pointer flex-shrink-0
-sm:basis-[48%] md:basis-[32%] lg:basis-[24%] xl:basis-[18%]
-aspect-[4/3.8]
-max-h-[210px]
-rounded-lg overflow-hidden shadow-xl border border-[#0ff0fc22]
-transition-transform duration-500 hover:scale-105
+group relative cursor-pointer flex-shrink-0
+sm:basis-[48%]
+md:basis-[44%] lg:basis-[34%] xl:basis-[26%]
+
+aspect-[4/3]
+md:aspect-[4/3.8]
+
+max-h-[180px]
+md:max-h-[260px] lg:max-h-[300px] xl:max-h-[340px]
+
+rounded-lg overflow-hidden shadow-xl
+border border-[#0ff0fc22]
+transition-transform duration-500 scale-95 hover:scale-100
+
+
 
   "
     >
@@ -85,9 +94,9 @@ transition-transform duration-500 hover:scale-105
             alt={name}
             fill
             loading="lazy"
-            quality={220}
-            onLoadingComplete={() => setLoading(false)}
-            className={`w-full h-full object-fill transition-transform duration-500 group-hover:scale-110 ${
+            quality={100}
+            onLoad={() => setLoading(false)}
+            className={`w-full h-full object-fill transition-transform duration-500 group-hover:scale-105 ${
               loading ? "opacity-0" : "opacity-100"
             }`}
           />
@@ -99,7 +108,7 @@ transition-transform duration-500 hover:scale-105
         </div>
 
         {/* NEW/HOT badges */}
-        <div className="absolute top-1 left-2 flex gap-2 z-10">
+        <div className="absolute top-2 left-2 flex gap-2 z-10">
           {isNew && (
             <span className="bg-[#010419] text-white text-xs font-bold px-2 py-0.5 rounded-full font-oxanium shadow">
               NEW
@@ -114,7 +123,7 @@ transition-transform duration-500 hover:scale-105
 
         {/* Hover overlay content */}
         <div
-          className="absolute inset-0 bg-[#E0146F]/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4"
+          className="absolute inset-0 bg-[#E0146F]/80 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4"
           onClick={() => {
             router.push(`/pay-game/${name}`);
           }}
@@ -122,8 +131,10 @@ transition-transform duration-500 hover:scale-105
           <h3 className="text-white font-oxanium font-bold text-sm md:text-xl mb-1 line-clamp-2">
             {name}
           </h3>
-          <p className="text-gray-200 text-xs md:text-sm line-clamp-3">
-            {description}
+          <p className="hidden md:block text-gray-200 text-xs md:text-sm">
+            {description.length > 50
+              ? description.slice(0, 50) + "..."
+              : description}
           </p>
         </div>
       </div>
