@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import RepeatingBackground from "@/components/RepeatedBackground";
 import { UserProvider } from "@/context/UserContext";
 import DynamicMeta from "@/components/DynamicMeta";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -175,7 +176,17 @@ export default function RootLayout({
         {/* Additional meta tags */}
         <meta name="msapplication-TileColor" content="#0a1628" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-4392441750573722"
+        ></meta>
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#BB0051" />
+        <Script
+          async
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4392441750573722"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={`${geistSans.variable} ${oxanium.variable} antialiased`}>
         <DynamicMeta />
