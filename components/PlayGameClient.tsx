@@ -45,7 +45,7 @@ const PlayGameClient: React.FC<PlayGameClientProps> = ({ url, name }) => {
         src={url}
         title={name}
         allowFullScreen
-        className={`border-none transition-all duration-300 ${
+        className={`border-none transition-all duration-300 overflow-y-auto hide-scrollbar ${
           fullscreen
             ? "fixed inset-0 z-[9999] w-full h-screen rounded-none"
             : `

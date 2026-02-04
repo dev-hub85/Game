@@ -53,20 +53,20 @@ const PlayGameLayout: React.FC<PlayGameLayoutProps> = ({
             {children}
           </div>
         </div>
-        <div className="bg-[#010419] pl-6 py-6 pr-2 md:pr-4 shadow-xl mt-5">
+        <div className="bg-[#010419] pl-2 md:pl-4 py-6 pr-2 md:pr-4 shadow-xl mt-5">
           <div className="flex justify-between items-center">
-            <h3 className="font-oxanium font-bold text-3xl mb-3 w-full">
+            <h3 className="font-oxanium font-bold text-2xl mb-3 w-full">
               About This Game
             </h3>
             <button
               onClick={copyToClipboard}
-              className="cursor-pointer text-white font-bold rounded-md bg-[#FF3D8E] py-2 px-3 flex items-center justify-center hover:text-white transition-all duration-300"
+              className="cursor-pointer text-white font-bold rounded-lg bg-[#FF3D8E] py-2 px-3 flex items-center justify-center hover:text-white transition-all duration-300"
               title="Share this page"
             >
               <FiShare2 size={20} /> Share
             </button>
           </div>
-          <p className="text-gray-300 text-base mb-3">{about}</p>
+          <p className="text-gray-300 text-base mb-3 mt-3">{about}</p>
           <div className="flex flex-wrap gap-3">
             {tags.map((tag, i) => (
               <span
