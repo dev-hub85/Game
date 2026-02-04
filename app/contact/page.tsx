@@ -2,7 +2,14 @@
 
 import Header from "@/components/header";
 import { useState } from "react";
-import { FiMail, FiMessageSquare, FiUser, FiSend } from "react-icons/fi";
+import {
+  FiMail,
+  FiMessageSquare,
+  FiUser,
+  FiSend,
+  FiPhone,
+} from "react-icons/fi";
+import emailjs from "@emailjs/browser";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,6 +20,9 @@ export default function ContactPage() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [sendStatus, setSendStatus] = useState<"idle" | "sending" | "sent">(
+    "idle",
+  );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -24,22 +34,102 @@ export default function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
+    setSendStatus("sending");
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
-      setSubmitted(false);
-    }, 3000);
+    try {
+      const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceID || !templateID || !publicKey) {
+        console.error("EmailJS environment variables are missing.");
+        setSendStatus("idle");
+        return;
+      }
+
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      };
+
+      await emailjs.send(serviceID, templateID, templateParams, publicKey);
+
+      console.log("Email sent successfully:", templateParams);
+      setSendStatus("sent");
+      setSubmitted(true);
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+        setSubmitted(false);
+        setSendStatus("idle");
+      }, 3000);
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      setSendStatus("idle");
+    }
+  };
+
+  const getButtonContent = () => {
+    switch (sendStatus) {
+      case "sending":
+        return (
+          <>
+            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+                fill="none"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+            Sending...
+          </>
+        );
+      case "sent":
+        return (
+          <>
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            Sent!
+          </>
+        );
+      default:
+        return (
+          <>
+            <FiSend />
+            Send Message
+          </>
+        );
+    }
   };
 
   return (
@@ -64,12 +154,12 @@ export default function ContactPage() {
           <div className="lg:col-span-1 space-y-6">
             <div className="bg-[#14243a] rounded-xl p-6 border border-[#0ff0fc33]">
               <div className="w-12 h-12 bg-gradient-to-r from-[#BB0051] to-[#FF3D8E] rounded-full flex items-center justify-center mb-4">
-                <FiMail className="text-white text-2xl" />
+                <FiPhone className="text-white text-2xl" />
               </div>
               <h3 className="text-xl font-bold font-oxanium text-white mb-2">
-                Email Us
+                Contact Us
               </h3>
-              <p className="text-[#b6c6e3] text-sm">support@yourgamesite.com</p>
+              <p className="text-[#b6c6e3] text-sm">+92-325-8005121</p>
             </div>
 
             <div className="bg-[#14243a] rounded-xl p-6 border border-[#0ff0fc33]">
@@ -128,7 +218,8 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full pl-12 pr-4 py-3 rounded-lg bg-[#0a1628] text-white border border-[#0ff0fc33] focus:outline-none focus:border-[#FF3D8E] transition-colors"
+                      disabled={sendStatus === "sending"}
+                      className="w-full pl-12 pr-4 py-3 rounded-lg bg-[#0a1628] text-white border border-[#0ff0fc33] focus:outline-none focus:border-[#FF3D8E] transition-colors disabled:opacity-50"
                       placeholder="Enter your name"
                     />
                   </div>
@@ -151,7 +242,8 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full pl-12 pr-4 py-3 rounded-lg bg-[#0a1628] text-white border border-[#0ff0fc33] focus:outline-none focus:border-[#FF3D8E] transition-colors"
+                      disabled={sendStatus === "sending"}
+                      className="w-full pl-12 pr-4 py-3 rounded-lg bg-[#0a1628] text-white border border-[#0ff0fc33] focus:outline-none focus:border-[#FF3D8E] transition-colors disabled:opacity-50"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -174,7 +266,8 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full pl-12 pr-4 py-3 rounded-lg bg-[#0a1628] text-white border border-[#0ff0fc33] focus:outline-none focus:border-[#FF3D8E] transition-colors"
+                      disabled={sendStatus === "sending"}
+                      className="w-full pl-12 pr-4 py-3 rounded-lg bg-[#0a1628] text-white border border-[#0ff0fc33] focus:outline-none focus:border-[#FF3D8E] transition-colors disabled:opacity-50"
                       placeholder="What is this about?"
                     />
                   </div>
@@ -194,8 +287,9 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={sendStatus === "sending"}
                     rows={6}
-                    className="w-full px-4 py-3 rounded-lg bg-[#0a1628] text-white border border-[#0ff0fc33] focus:outline-none focus:border-[#FF3D8E] transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-lg bg-[#0a1628] text-white border border-[#0ff0fc33] focus:outline-none focus:border-[#FF3D8E] transition-colors resize-none disabled:opacity-50"
                     placeholder="Tell us more about your inquiry..."
                   />
                 </div>
@@ -203,16 +297,15 @@ export default function ContactPage() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-3 px-6 rounded-lg font-oxanium font-bold text-white bg-gradient-to-r from-[#BB0051] to-[#FF3D8E] hover:brightness-110 transition-all duration-300 flex items-center justify-center gap-2"
+                  disabled={sendStatus === "sending"}
+                  className="w-full py-3 px-6 rounded-lg font-oxanium font-bold text-white bg-gradient-to-r from-[#BB0051] to-[#FF3D8E] hover:brightness-110 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <FiSend />
-                  Send Message
+                  {getButtonContent()}
                 </button>
               </form>
             </div>
           </div>
         </div>
-
       </section>
     </main>
   );

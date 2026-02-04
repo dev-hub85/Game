@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Header from "@/components/header";
 import GameMediaGallery from "@/components/GameMeida";
@@ -5,6 +7,7 @@ import GameCard from "@/components/GameCard";
 import { Game } from "@/type/game";
 import HitsCounter from "@/components/HitsCounter";
 import ReviewsSection from "@/components/ReviewsSection";
+import { FiShare2 } from "react-icons/fi";
 
 interface PlayGameLayoutProps {
   game: Game;
@@ -23,6 +26,11 @@ const PlayGameLayout: React.FC<PlayGameLayoutProps> = ({
   tags,
   children,
 }) => {
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href);
+    alert("Page URL copied to clipboard!");
+  };
+
   return (
     <div className="min-h-screen  text-white">
       <Header />
@@ -45,10 +53,19 @@ const PlayGameLayout: React.FC<PlayGameLayoutProps> = ({
             {children}
           </div>
         </div>
-        <div className="bg-[#010419] p-6 shadow-xl mt-5">
-          <h3 className="font-oxanium font-bold text-2xl mb-3">
-            About This Game
-          </h3>
+        <div className="bg-[#010419] pl-6 py-6 pr-2 md:pr-4 shadow-xl mt-5">
+          <div className="flex justify-between items-center">
+            <h3 className="font-oxanium font-bold text-3xl mb-3 w-full">
+              About This Game
+            </h3>
+            <button
+              onClick={copyToClipboard}
+              className="cursor-pointer text-white font-bold rounded-md bg-[#FF3D8E] py-2 px-3 flex items-center justify-center hover:text-white transition-all duration-300"
+              title="Share this page"
+            >
+              <FiShare2 size={20} /> Share
+            </button>
+          </div>
           <p className="text-gray-300 text-base mb-3">{about}</p>
           <div className="flex flex-wrap gap-3">
             {tags.map((tag, i) => (

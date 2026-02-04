@@ -39,7 +39,6 @@ const PlayGameClient: React.FC<PlayGameClientProps> = ({ url, name }) => {
       >
         {fullscreen ? <FiMinimize size={20} /> : <FiMaximize size={20} />}
       </button>
-
       {/* Iframe */}
       <iframe
         ref={iframeRef}
@@ -57,6 +56,10 @@ const PlayGameClient: React.FC<PlayGameClientProps> = ({ url, name }) => {
         }`}
         style={{ background: "#000" }}
       />
+      <div className="text-gray-400 text-xs flex items-center w-full justify-center bg-black/70 text-center">
+        If Advertisement does not load, please wait for a few seconds to Skip
+        button to appear.
+      </div>
     </div>
   );
 };

@@ -32,7 +32,7 @@ import { logOut } from "@/lib/auth";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 import AuthModal from "./AuthModal";
-
+import Image from "next/image";
 const COLORS = {
   bg: "#12141B",
   panel: "#010419",
@@ -185,26 +185,35 @@ const Sidebar = () => {
         </div>
 
         {/* Branding */}
-        <div className="flex items-center gap-3 px-6 py-4">
-          <div
-            className="p-2 rounded-lg shadow-md"
-            style={{
-              background: PRIMARY_GRADIENT,
-              boxShadow: "0 8px 20px rgba(187, 0, 81, 0.45)",
-            }}
-          >
-            <FaGamepad className="text-[#12141B] text-2xl" />
+        <div className="flex items-center gap-1 px-2 md:px-2 py-4">
+          <div>
+            <Image
+              src="/logo.png"
+              alt="Neo Games Logo"
+              width={80}
+              height={100}
+              className="object-contain"
+            />
           </div>
 
-          <div>
-            <div className="text-lg font-bold tracking-wide text-white font-oxanium">
-              GAMEZONE
-            </div>
+          <div className="leading-tight font-oxanium mt-1">
             <div
-              className="text-xs font-oxanium"
-              style={{ color: COLORS.muted }}
+              className="
+      text-2xl font-extrabold tracking-widest
+      bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500
+      bg-clip-text text-transparent
+    "
             >
-              Play Free HTML5 Games
+              NEOGAMES
+            </div>
+
+            <div
+              className="flex justify-end
+      text-sm tracking-[0.2em] mt-[-3px] pl-[2px]
+      text-purple-400
+    "
+            >
+              .SPACE
             </div>
           </div>
         </div>

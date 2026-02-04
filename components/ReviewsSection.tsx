@@ -22,6 +22,7 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
   const [loading, setLoading] = useState(true);
   const [isReviewModalOpen, setReviewModalOpen] = useState(false);
   const [isAuthModalOpen, setAuthModalOpen] = useState(false);
+  const [visibleReviews, setVisibleReviews] = useState(10);
 
   const fetchReviews = async () => {
     setLoading(true);
@@ -83,6 +84,24 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
     );
   };
 
+  const getRandomGradient = () => {
+    const colors = [
+      ["#BB0051", "#FF3D8E"],
+      ["#FF5733", "#FFC300"],
+      ["#33FF57", "#33FFC3"],
+      ["#5733FF", "#C300FF"],
+      ["#33A1FF", "#33FFF5"],
+    ];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return {
+      background: `linear-gradient(to right, ${colors[randomIndex][0]}, ${colors[randomIndex][1]})`,
+    };
+  };
+
+  const handleLoadMore = () => {
+    setVisibleReviews((prev) => prev + 10);
+  };
+
   return (
     <div>
       <div className="bg-[#010419] px-2 md:px-4 py-4">
@@ -133,14 +152,17 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
           </div>
         ) : (
           <div className="space-y-4">
-            {reviews.map((review) => (
+            {reviews.slice(0, visibleReviews).map((review) => (
               <div
                 key={review.id}
                 className="bg-[#14243a]/50 rounded-xl p-4 border border-[#0ff0fc33]"
               >
                 <div className="flex items-start justify-between gap-4 mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#BB0051] to-[#FF3D8E] flex items-center justify-center text-white font-bold">
+                    <div
+                      style={getRandomGradient()}
+                      className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
+                    >
                       {review.userName.charAt(0).toUpperCase()}
                     </div>
                     <div>
@@ -159,6 +181,16 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                 </p>
               </div>
             ))}
+            {visibleReviews < reviews.length && (
+              <div className="text-center mt-4">
+                <button
+                  onClick={handleLoadMore}
+                  className="px-4 py-2 rounded-lg font-bold text-white bg-gradient-to-r from-[#BB0051] to-[#FF3D8E] hover:brightness-110 transition-all duration-300"
+                >
+                  Load More
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

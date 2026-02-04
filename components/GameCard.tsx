@@ -65,12 +65,12 @@ sm:basis-[48%]
 md:basis-[44%] lg:basis-[34%] xl:basis-[26%]
 
 aspect-[4/3]
-md:aspect-[4/3.8]
+md:aspect-[4/3.35]
 
 max-h-[180px]
-md:max-h-[260px] lg:max-h-[300px] xl:max-h-[340px]
+md:max-h-[260px] lg:max-h-[280px] xl:max-h-[300px]
 
-rounded-lg overflow-hidden shadow-xl
+rounded-2xl overflow-hidden shadow-xl
 border border-[#0ff0fc22]
 transition-transform duration-500 scale-95 hover:scale-100
 

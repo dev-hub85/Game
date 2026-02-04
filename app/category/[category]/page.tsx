@@ -94,13 +94,15 @@ const CategoryPage = () => {
         {/* Game Grid */}
         <div className="flex flex-wrap -mx-2">
           {sortedGames.length === 0 ? (
-            <p className="text-[#b6c6e3] text-sm">No games found.</p>
+            <p className="text-[#b6c6e3] text-sm flex items-center justify-center w-full h-screen">
+              No games found.
+            </p>
           ) : (
             sortedGames.map((game) => (
               <div
                 key={game.id}
                 className="
-                  px-2 mb-4
+                  px-1 mb-4
                   w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5
                   flex-shrink-0
                 "

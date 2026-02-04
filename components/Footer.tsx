@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { FaGamepad } from "react-icons/fa";
+import Image from "next/image";
+import { AiFillFacebook, AiFillYoutube } from "react-icons/ai";
+import Link from "next/link";
+import { FaFacebookF } from "react-icons/fa";
 
 const PRIMARY_GRADIENT =
   "linear-gradient(135deg, #BB0051 0%, #E0146F 50%, #FF3D8E 100%)";
@@ -13,23 +16,36 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-10">
         {/* Branding */}
         <div className="flex flex-col gap-4 min-w-[180px]">
-          <div className="flex items-center gap-3 mb-2">
-            <div
-              className="p-2 rounded-lg shadow-md"
-              style={{
-                background: PRIMARY_GRADIENT,
-                boxShadow: "0 8px 20px rgba(187, 0, 81, 0.45)",
-              }}
-            >
-              <FaGamepad className="text-[#12141B] text-2xl" />
+          <div className="flex items-center gap-1 py-1">
+            <div>
+              <Image
+                src="/logo.png"
+                alt="Neo Games Logo"
+                width={80}
+                height={100}
+                className="object-contain"
+              />
             </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-white font-bold text-xl tracking-wide font-oxanium">
-                GAMEZONE
-              </span>
-              <span className="text-xs text-[#9AA0B4] -mt-1 font-oxanium">
-                Play Free HTML5 Games
-              </span>
+
+            <div className="leading-tight font-oxanium mt-1">
+              <div
+                className="
+                text-2xl font-extrabold tracking-widest
+                bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500
+                bg-clip-text text-transparent
+              "
+              >
+                NEOGAMES
+              </div>
+
+              <div
+                className="flex justify-end
+                text-sm tracking-[0.2em] mt-[-3px] pl-[2px]
+                text-purple-400
+              "
+              >
+                .SPACE
+              </div>
             </div>
           </div>
           <p className="text-[#b6c6e3] text-xs max-w-xs">
@@ -38,19 +54,20 @@ const Footer = () => {
           </p>
           {/* Social Icons */}
           <div className="flex gap-2 mt-2">
-            <Link href="https://facebook.com" target="_blank">
-              <span className="w-8 h-8 bg-[#112233] rounded-full flex items-center justify-center text-[#0ff0fc] cursor-pointer">
-                F
+            <Link
+              href="https://www.facebook.com/Neo-Games-61587546806027"
+              target="_blank"
+            >
+              <span className="w-8 h-8 bg-[#112233] rounded-full flex items-center justify-center text-[#1877F2] cursor-pointer">
+                <FaFacebookF size={20} />
               </span>
             </Link>
-            <Link href="https://twitter.com" target="_blank">
-              <span className="w-8 h-8 bg-[#112233] rounded-full flex items-center justify-center text-[#0ff0fc] cursor-pointer">
-                T
-              </span>
-            </Link>
-            <Link href="https://youtube.com" target="_blank">
-              <span className="w-8 h-8 bg-[#112233] rounded-full flex items-center justify-center text-[#0ff0fc] cursor-pointer">
-                Y
+            <Link
+              href="https://www.youtube.com/channel/UCj05x-uIOhE4mhJVxWGFldQ"
+              target="_blank"
+            >
+              <span className="w-8 h-8 bg-[#112233] rounded-full flex items-center justify-center text-[#FF0000] cursor-pointer">
+                <AiFillYoutube size={24} />
               </span>
             </Link>
           </div>
