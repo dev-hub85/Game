@@ -4,4 +4,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://neogames.space/sitemap.xml
-Host: https://neogames.space
