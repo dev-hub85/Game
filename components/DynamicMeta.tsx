@@ -7,7 +7,10 @@ const DynamicMeta = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!pathname.startsWith("/play-game")) {
+    if (
+      !pathname.startsWith("/play-game") ||
+      !pathname.startsWith("/category/")
+    ) {
       document.title =
         "Neo Games Play thousands of free HTML5 games online. No downloads, no registration required. Just pure gaming fun!";
       document

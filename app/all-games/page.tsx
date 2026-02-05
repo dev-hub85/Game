@@ -1,4 +1,5 @@
 "use client";
+
 import HTMLGames from "../../lib/html_games";
 import Categories from "../../lib/categories";
 import GameCard from "../../components/GameCard";
@@ -111,6 +112,24 @@ export default function AllGamesPage() {
           </span>
         </div>
 
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `
+              <amp-ad
+                width="100vw"
+                height="320"
+                type="adsense"
+                data-ad-client="ca-pub-4392441750573722"
+                data-ad-slot="6757411504"
+                data-auto-format="rspv"
+                data-full-width=""
+              >
+                <div overflow=""></div>
+              </amp-ad>
+            `,
+          }}
+        />
+
         {/* Game Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4">
           {paginatedGames.map((game, i) => (
@@ -216,6 +235,23 @@ export default function AllGamesPage() {
             </span>
           </div>
         </div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `
+              <amp-ad
+                width="100vw"
+                height="320"
+                type="adsense"
+                data-ad-client="ca-pub-4392441750573722"
+                data-ad-slot="6757411504"
+                data-auto-format="rspv"
+                data-full-width=""
+              >
+                <div overflow=""></div>
+              </amp-ad>
+            `,
+          }}
+        />
       </section>
     </main>
   );

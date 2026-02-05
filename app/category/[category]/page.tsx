@@ -72,7 +72,7 @@ const CategoryPage = () => {
     <main>
       <Header />
 
-      <section className="max-w-7xl mx-auto pt-5 px-2 md:px-4">
+      <section className="max-w-7xl mx-auto pt-5 px-4 md:px-4">
         {/* Sort */}
         <div className="flex flex-row md:flex-row gap-4 items-start md:items-center justify-between mb-6">
           <div className="flex gap-2 w-full md:w-auto">
@@ -90,6 +90,23 @@ const CategoryPage = () => {
             {decodeURIComponent(selectedCategory)}&quot;
           </span>
         </div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `
+              <amp-ad
+                width="100vw"
+                height="320"
+                type="adsense"
+                data-ad-client="ca-pub-4392441750573722"
+                data-ad-slot="6757411504"
+                data-auto-format="rspv"
+                data-full-width=""
+              >
+                <div overflow=""></div>
+              </amp-ad>
+            `,
+          }}
+        />
 
         {/* Game Grid */}
         <div className="flex flex-wrap -mx-2">
@@ -137,6 +154,23 @@ const CategoryPage = () => {
             ))
           )}
         </div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `
+              <amp-ad
+                width="100vw"
+                height="320"
+                type="adsense"
+                data-ad-client="ca-pub-4392441750573722"
+                data-ad-slot="6757411504"
+                data-auto-format="rspv"
+                data-full-width=""
+              >
+                <div overflow=""></div>
+              </amp-ad>
+            `,
+          }}
+        />
       </section>
     </main>
   );

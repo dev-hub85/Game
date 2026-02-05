@@ -22,7 +22,7 @@ const PlayGameClient: React.FC<PlayGameClientProps> = ({ url, name }) => {
   }, [fullscreen]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full overflow-y-auto hide-scrollbar">
       {/* Control Button */}
       <button
         onClick={toggleFullscreen}
@@ -49,7 +49,7 @@ const PlayGameClient: React.FC<PlayGameClientProps> = ({ url, name }) => {
           fullscreen
             ? "fixed inset-0 z-[9999] w-full h-screen rounded-none"
             : `
-              w-full h-screen
+              w-full h-[70vh]
               md:w-full md:h-auto md:aspect-[16/9] md:min-h-[320px]
               rounded-xl
             `

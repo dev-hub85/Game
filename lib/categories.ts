@@ -54,7 +54,7 @@ const Categories = [
   "Tripeaks & Golf",
   "Word Games",
   "Zuma Games",
-   "3D","Action","Casual","Driving","Girls","Logic","MMO","Multiplayer","Sports","Strategy",
+  "3D","Action","Casual","Driving","Girls","Logic","MMO","Multiplayer","Sports","Strategy",
 ];
 
 export default Categories;

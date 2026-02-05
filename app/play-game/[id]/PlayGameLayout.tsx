@@ -35,7 +35,7 @@ const PlayGameLayout: React.FC<PlayGameLayoutProps> = ({
     <div className="min-h-screen  text-white">
       <Header />
       <main className="flex-1 w-full mx-auto pt-5">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-6 px-2 md:px-2 lg:px-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-6 px-4 md:px-2 lg:px-4">
           <h1 className="font-oxanium font-extrabold text-2xl md:text-3xl mb-0 drop-shadow-lg">
             {game.name}
           </h1>
@@ -52,6 +52,23 @@ const PlayGameLayout: React.FC<PlayGameLayoutProps> = ({
           <div className="flex-1 bg-[#010419] rounded-2xl shadow-2xl border border-[#FF3D8E] flex flex-col items-center justify-center min-h-105 relative p-1">
             {children}
           </div>
+             <div
+          dangerouslySetInnerHTML={{
+            __html: `
+              <amp-ad
+                width="100vw"
+                height="320"
+                type="adsense"
+                data-ad-client="ca-pub-4392441750573722"
+                data-ad-slot="6757411504"
+                data-auto-format="rspv"
+                data-full-width=""
+              >
+                <div overflow=""></div>
+              </amp-ad>
+            `,
+          }}
+        />
         </div>
         <div className="bg-[#010419] pl-2 md:pl-4 py-6 pr-2 md:pr-4 shadow-xl mt-5">
           <div className="flex justify-between items-center">

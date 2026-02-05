@@ -7,6 +7,7 @@ import RepeatingBackground from "@/components/RepeatedBackground";
 import { UserProvider } from "@/context/UserContext";
 import DynamicMeta from "@/components/DynamicMeta";
 import Script from "next/script";
+import { Bree_Serif } from "next/font/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -187,6 +188,11 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4392441750573722"
           crossOrigin="anonymous"
         />
+        <script
+          async
+          custom-element="amp-ad"
+          src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"
+        ></script>
       </head>
       <body className={`${geistSans.variable} ${oxanium.variable} antialiased`}>
         <DynamicMeta />
