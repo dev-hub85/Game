@@ -177,6 +177,7 @@ export default function RootLayout({
         {/* Additional meta tags */}
         <meta name="msapplication-TileColor" content="#0a1628" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="monetag" content="44437e9ce6891d5f15e2779bd502f125"></meta>
         <meta
           name="google-adsense-account"
           content="ca-pub-4392441750573722"
