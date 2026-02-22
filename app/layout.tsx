@@ -211,30 +211,6 @@ export default function RootLayout({
             `,
           }}
         />
-        <Script
-          id="nap5k-tag-inline"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(s) {
-                s.dataset.zone = "10640343";
-                s.src = "https://nap5k.com/tag.min.js";
-              })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
-            `,
-          }}
-        />
-        <Script
-          id="al5sm-tag"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(s) {
-                s.dataset.zone = "10640238";
-                s.src = "https://al5sm.com/tag.min.js";
-              })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
-            `,
-          }}
-        />
       </head>
       <body className={`${geistSans.variable} ${oxanium.variable} antialiased`}>
         <DynamicMeta />
