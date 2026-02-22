@@ -34,6 +34,7 @@ const GameCard: React.FC<GameCardProps> = ({
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
+  const [clicked, setClicked] = useState(false);
 
   // Compute isNew based on last 2 months
   let isNew = false;
@@ -52,8 +53,12 @@ const GameCard: React.FC<GameCardProps> = ({
   }
 
   const handleNavigate = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    router.push(`/play-game/${id}`);
+    if (!clicked) {
+      setClicked(true);
+      window.open("https://omg10.com/4/10640280", "_blank");
+    } else {
+      router.push(`/play-game/${id}`);
+    }
   };
 
   return (
@@ -124,8 +129,13 @@ transition-transform duration-500 scale-95 hover:scale-100
         {/* Hover overlay content */}
         <div
           className="absolute inset-0 bg-[#E0146F]/80 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4"
-          onClick={() => {
-            router.push(`/pay-game/${name}`);
+          onClick={(e) => {
+            if (!clicked) {
+              setClicked(true);
+              window.open("https://omg10.com/4/10640280", "_blank");
+            } else {
+              router.push(`/play-game/${id}`);
+            }
           }}
         >
           <h3 className="text-white font-oxanium font-bold text-sm md:text-xl mb-1 line-clamp-2">
