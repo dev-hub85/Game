@@ -10,8 +10,8 @@
 
 # # Modify data
 # for item in data:
-#     if "name" in item:
-#         item["id"] = name_to_id(item["name"])
+#     if "title" in item:
+#         item["id"] = name_to_id(item["title"])
 
 # # Write back to file (optional)
 # with open("data_updated.json", "w", encoding="utf-8") as file:

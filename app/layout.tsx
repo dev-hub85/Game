@@ -36,133 +36,111 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  // Basic Metadata
+  metadataBase: new URL("https://neogames.space"),
+
   title: {
     default:
-      "Neo Games Play thousands of free HTML5 games online. No downloads, no registration required. Just pure gaming fun!",
-    template: "%s | NeoGames",
+      "Free Online Games (No Download) | Play HTML5 Browser Games - NeoGames",
+    template: "%s | Free Online Games - NeoGames",
   },
+
   description:
-    "NeoGames is your ultimate gaming hub. Discover the latest games, play exciting titles online, explore retro classics, and level up your gaming experience.",
+    "Play free online games with no downloads required. Enjoy thousands of HTML5 browser games including action, racing, puzzle, multiplayer, kids games and more. Start playing instantly on NeoGames!",
+
   keywords: [
-    "online games",
-    "play games online",
-    "gaming website",
-    "retro games",
-    "new game releases",
-    "multiplayer games",
     "free online games",
-    "game reviews",
-    "game guides",
-    "gaming community",
-    "NeoGames",
+    "play games online free",
+    "no download games",
+    "HTML5 games",
     "browser games",
-    "casual games",
-    "action games",
-    "puzzle games",
+    "unblocked games",
+    "free multiplayer games",
+    "kids games online",
+    "action games online",
+    "puzzle games free",
+    "racing games online",
+    "arcade games",
+    "mobile browser games",
+    "instant play games",
+    "NeoGames",
   ],
+
   authors: [{ name: "NeoGames Team", url: "https://neogames.space" }],
   creator: "NeoGames",
   publisher: "NeoGames",
   generator: "Next.js",
 
-  // Robots
   robots: {
     index: true,
     follow: true,
-    nocache: false,
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
     },
   },
 
-  // Favicons and Icons
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
       { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
 
-  // Manifest
   manifest: "/manifest.json",
 
-  // Open Graph (Facebook, LinkedIn, etc.)
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://neogames.space",
     siteName: "NeoGames",
-    title: "NeoGames - Play, Discover & Master Games Online",
+    title:
+      "Free Online Games - Play HTML5 Browser Games Without Download | NeoGames",
     description:
-      "NeoGames is your ultimate gaming hub. Discover the latest games, play exciting titles online, explore retro classics, and level up your gaming experience.",
+      "Play thousands of free online games instantly. No download, no registration. Action, racing, puzzle, multiplayer and kids games available on all devices.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "NeoGames - Your Ultimate Gaming Hub",
-        type: "image/png",
-      },
-      {
-        url: "/og-image-square.png",
-        width: 600,
-        height: 600,
-        alt: "NeoGames Logo",
-        type: "image/png",
+        alt: "Free Online Games - NeoGames",
       },
     ],
   },
 
-  // Twitter Card
   twitter: {
     card: "summary_large_image",
-    site: "@neogames",
-    creator: "@neogames",
-    title: "NeoGames - Play, Discover & Master Games Online",
+    title: "Free Online Games (No Download) - Play Instantly | NeoGames",
     description:
-      "NeoGames is your ultimate gaming hub. Discover the latest games, play exciting titles online, explore retro classics, and level up your gaming experience.",
+      "Enjoy the best free browser games online. Play action, puzzle, racing and multiplayer games instantly with no downloads.",
     images: ["/twitter-image.png"],
   },
 
-  // App Links
   applicationName: "NeoGames",
+
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "NeoGames",
   },
 
-  // Format Detection
   formatDetection: {
     telephone: false,
-    date: false,
     email: false,
     address: false,
   },
-  // Category
+
   category: "games",
 
-  // Other
   referrer: "origin-when-cross-origin",
-  metadataBase: new URL("https://neogames.space"),
+
   alternates: {
-    canonical: "/",
-    languages: {
-      "en-US": "/en-US",
-    },
+    canonical: "https://neogames.space",
   },
 };
 

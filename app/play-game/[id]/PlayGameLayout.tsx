@@ -114,11 +114,6 @@ const PlayGameLayout: React.FC<PlayGameLayoutProps> = ({
                   g.description || g.translations?.en?.description || ""
                 }
                 thumb={
-                  g.thumb8 ||
-                  g.thumb7 ||
-                  g.thumb6 ||
-                  g.thumb5 ||
-                  g.thumb4 ||
                   g.thumb3 ||
                   g.thumb2 ||
                   g.thumb1 ||

@@ -20,7 +20,7 @@ const FeaturedGames = () => {
 
   /* ---------------- Prepare Featured Games ---------------- */
   const featured: Game[] = shuffleArray(
-    HTMLGames.slice(100, 122).map(normalizeGame),
+    HTMLGames.slice(400, 420).map(normalizeGame),
   );
 
   /* ---------------- Scroll Function ---------------- */

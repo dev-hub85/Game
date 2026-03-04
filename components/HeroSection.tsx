@@ -17,7 +17,7 @@ const HeroSection = () => {
 
   /* ---------------- Featured Games ---------------- */
   const featured: Game[] = useMemo(
-    () => HTMLGames.slice(27, 39).map(normalizeGame),
+    () => HTMLGames.slice(52, 66).map(normalizeGame),
     [],
   );
 

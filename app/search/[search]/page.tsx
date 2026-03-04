@@ -126,11 +126,6 @@ const SearchPage = () => {
                     game.description || game.translations?.en?.description || ""
                   }
                   thumb={
-                    game.thumb8 ||
-                    game.thumb7 ||
-                    game.thumb6 ||
-                    game.thumb5 ||
-                    game.thumb4 ||
                     game.thumb3 ||
                     game.thumb2 ||
                     game.thumb1 ||

@@ -159,7 +159,7 @@ export default function ContactPage() {
               <h3 className="text-xl font-bold font-oxanium text-white mb-2">
                 Contact Us
               </h3>
-              <p className="text-[#b6c6e3] text-sm">+92-325-8005121</p>
+              <p className="text-[#b6c6e3] text-sm">neogames.space@gmail.com</p>
             </div>
 
             <div className="bg-[#14243a] rounded-xl p-6 border border-[#0ff0fc33]">
