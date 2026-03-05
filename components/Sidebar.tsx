@@ -276,13 +276,14 @@ const Sidebar = () => {
 
           <div className="space-y-1">
             {Categories.map((cat) => {
-              const active =
-                pathname === `/category/${encodeURIComponent(cat)}`;
+              const slug = cat.toLowerCase().trim().replace(/\s+/g, "-");
+
+              const active = pathname === `/category/${slug}`;
 
               return (
                 <Link
                   key={cat}
-                  href={`/category/${encodeURIComponent(cat)}`}
+                  href={`/category/${slug}`}
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-3 px-5 py-2 rounded-lg text-sm font-oxanium transition-all"
                   style={{

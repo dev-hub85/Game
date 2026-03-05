@@ -37,6 +37,14 @@ const CategoryPage = () => {
   const router = useRouter();
   const params = useParams();
   const selectedCategory = decodeURIComponent(params.category as string);
+  const decodedCategory = selectedCategory
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase())
+    .replace(/\b3d\b/gi, "3D")
+    .replace(/\bmmo\b/gi, "MMO");
+
+  console.log("Selected category from URL:", selectedCategory);
+  console.log("Decoded category:", decodedCategory);
 
   const [sort, setSort] = useState<SortType>("newest");
   const [allGames, setAllGames] = useState<Game[]>([]);
@@ -57,11 +65,11 @@ const CategoryPage = () => {
   const filteredGames: Game[] = useMemo(() => {
     return allGames.filter(
       (game) =>
-        selectedCategory === "All" ||
-        game.category === selectedCategory ||
-        (game.categories?.includes(selectedCategory) ?? false),
+        decodedCategory === "All" ||
+        game.category === decodedCategory ||
+        (game.categories?.includes(decodedCategory) ?? false),
     );
-  }, [allGames, selectedCategory]);
+  }, [allGames, decodedCategory]);
 
   const sortedGames = useMemo(
     () => sortGames(filteredGames, sort),
@@ -87,7 +95,7 @@ const CategoryPage = () => {
 
           <span className="text-white font-oxanium text-sm">
             Showing {sortedGames.length} games in &quot;
-            {decodeURIComponent(selectedCategory)}&quot;
+            {decodedCategory}&quot;
           </span>
         </div>
         <div

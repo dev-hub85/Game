@@ -8,6 +8,7 @@ import onlineGamesIOData from "@/lib/online_games_io";
 import { Game } from "@/type/game";
 import { Metadata } from "next";
 
+// Generate static paths for SSG
 export async function generateStaticParams() {
   return [
     ...HTMLGames.map((game) => ({ id: game.id })),
@@ -19,24 +20,28 @@ export async function generateStaticParams() {
 interface PlayGamePageProps {
   params: Promise<{ id: string }>;
 }
-// Dynamic metadata function
+
+// Fully SEO-optimized metadata
 export async function generateMetadata({
   params,
 }: PlayGamePageProps): Promise<Metadata> {
   const id = (await params).id;
   const game = getGameById(id);
-  if (!game)
+
+  if (!game) {
     return {
-      title: "Game Not Found",
-      description: "This game does not exist.",
+      title: "Game Not Found | NeoGames",
+      description: "This game does not exist on NeoGames.",
+      robots: { index: false, follow: false },
     };
+  }
 
   const description =
     game.description ||
     game.translations?.en?.description ||
     "Play this exciting game online at NeoGames.";
 
-  // Take category + tags (first 4 words from description)
+  // Take first 4 capitalized words from description as tags
   const tags = (game.category ? [game.category] : [])
     .concat(description.match(/\b([A-Z][a-z]+)\b/g) || [])
     .slice(0, 4);
@@ -47,11 +52,53 @@ export async function generateMetadata({
     ...tags,
   ];
 
+  const url = `https://neogames.space/play-game/${game.id}`;
+
   return {
+    metadataBase: new URL("https://neogames.space"),
+
     title: `${game.name} - Play Online at NeoGames`,
     description,
+
     keywords: keywordsArray.join(", "),
-    robots: "index, follow",
+
+    robots: {
+      index: true,
+      follow: true,
+    },
+
+    alternates: {
+      canonical: url,
+    },
+
+    openGraph: {
+      title: `${game.name} - Play Online at NeoGames`,
+      description,
+      url,
+      siteName: "NeoGames",
+      type: "website",
+      images: [
+        {
+          url:
+            game.thumb3 ||
+            game.thumb2 ||
+            game.thumb1 ||
+            game.thumbnail ||
+            game.image ||
+            "/default-game.jpg",
+          width: 1200,
+          height: 630,
+          alt: game.name,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: `${game.name} - Play Online at NeoGames`,
+      description,
+      images: [game.thumbnail || game.image || "/default-game.jpg"],
+    },
   };
 }
 

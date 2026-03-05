@@ -104,19 +104,20 @@ const GameCategories = () => {
           className="flex overflow-x-auto hide-scrollbar scroll-smooth gap-2"
         >
           {Categories.filter((cat) => categoryImages[cat]?.image).map((cat) => {
+            const slug = cat.toLowerCase().trim().replace(/\s+/g, "-");
             const data = categoryImages[cat];
             const randomColor = categoryColorMap[cat]; // stable per card
 
             return (
               <div
-                key={cat}
+                key={slug}
                 className="min-w-[140px] max-w-[160px] rounded-2xl flex flex-col py-2 items-center justify-between cursor-pointer transition-all scale-95 hover:scale-100 border-2"
                 style={{
                   backgroundColor: `${randomColor.bg}25`,
                   borderColor: darken(randomColor.bg, 20),
                   borderStyle: "solid",
                 }}
-                onClick={() => router.push(`/category/${cat}`)}
+                onClick={() => router.push(`/category/${slug}`)}
               >
                 <div className="w-30 h-24 rounded-lg overflow-hidden flex items-center justify-center mb-2 relative group">
                   <Image
