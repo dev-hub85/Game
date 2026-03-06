@@ -40,20 +40,29 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "Free Online Games (No Download) | Play HTML5 Browser Games - NeoGames",
+      "Free Online Games – Play HTML5 Browser Games, Card, Puzzle & Racing Games | NeoGames",
     template: "%s | Free Online Games - NeoGames",
   },
 
   description:
-    "Play free online games with no downloads required. Enjoy thousands of HTML5 browser games including action, racing, puzzle, multiplayer, kids games and more. Start playing instantly on NeoGames!",
+    "Play the best free online games with no downloads required on NeoGames. Discover thousands of HTML5 browser games including spider solitaire, card games, puzzle games, racing games, arcade games, multiplayer games, and kids games online. Enjoy unblocked games, snake game, crossword puzzles, math games, and action games that work perfectly on mobile and desktop browsers. Start playing free games online instantly.",
 
   keywords: [
     "free online games",
+    "free games",
+    "free games online",
+    "spider solitaire",
+    "card games",
+    "board games",
+    "snow games",
+    "car games",
     "play games online free",
+    "best online games",
     "no download games",
     "HTML5 games",
     "browser games",
     "unblocked games",
+    "games snake game",
     "free multiplayer games",
     "kids games online",
     "action games online",
@@ -63,6 +72,13 @@ export const metadata: Metadata = {
     "mobile browser games",
     "instant play games",
     "NeoGames",
+    "free crossword puzzles",
+    "ree online games about money",
+    "free online games for kids",
+    "online math game",
+    "free online games for girls",
+    "free online games on google",
+    "free online games with no downloads",
   ],
 
   authors: [{ name: "NeoGames Team", url: "https://neogames.space" }],
@@ -100,9 +116,9 @@ export const metadata: Metadata = {
     url: "https://neogames.space",
     siteName: "NeoGames",
     title:
-      "Free Online Games - Play HTML5 Browser Games Without Download | NeoGames",
+      "Free Online Games – Play HTML5 Browser Games, Card, Puzzle & Racing Games | NeoGames",
     description:
-      "Play thousands of free online games instantly. No download, no registration. Action, racing, puzzle, multiplayer and kids games available on all devices.",
+      "Play the best free online games with no downloads required on NeoGames. Discover thousands of HTML5 browser games including spider solitaire, card games, puzzle games, racing games, arcade games, multiplayer games, and kids games online. Enjoy unblocked games, snake game, crossword puzzles, math games, and action games that work perfectly on mobile and desktop browsers. Start playing free games online instantly.",
     images: [
       {
         url: "/og-image.png",
@@ -115,9 +131,10 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Free Online Games (No Download) - Play Instantly | NeoGames",
+    title:
+      "Free Online Games – Play HTML5 Browser Games, Card, Puzzle & Racing Games | NeoGames",
     description:
-      "Enjoy the best free browser games online. Play action, puzzle, racing and multiplayer games instantly with no downloads.",
+      "Play the best free online games with no downloads required on NeoGames. Discover thousands of HTML5 browser games including spider solitaire, card games, puzzle games, racing games, arcade games, multiplayer games, and kids games online. Enjoy unblocked games, snake game, crossword puzzles, math games, and action games that work perfectly on mobile and desktop browsers. Start playing free games online instantly.",
     images: ["/twitter-image.png"],
   },
 
