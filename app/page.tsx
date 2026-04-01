@@ -13,9 +13,8 @@ export default function Home() {
       <main className="min-h-screen w-full font-sans">
         <Header />
         <HeroSection />
-        <FeaturedGames />
         <GameCategories />
-        <NewArrivals />
+        <FeaturedGames />
       </main>{" "}
     </>
   );
